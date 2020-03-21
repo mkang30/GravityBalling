@@ -1,5 +1,5 @@
 # Gravity Balling
-This is the Swift Xcode Playground version of my mobile game/application Gravity Balling. Gravity Balling is a 3D game created in Swift using frameworks SceneKit(3D graphics) and SpriteKit(2D graphics).
+This is the Swift Xcode Playground version of my IOS application Gravity Balling. Gravity Balling is a 3D game created in Swift using frameworks SceneKit(3D graphics) and SpriteKit(2D graphics).
 ## Description
 ### Menu
 <img src="https://github.com/mkang30/GravityBalling/blob/master/menu.png" width="300" height="300"/>
