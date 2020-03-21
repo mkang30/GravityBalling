@@ -1,0 +1,92 @@
+Images taken from:
+
+Name: "Football"
+Directory: "Resources/Images"
+Source: "https://depositphotos.com/2670838/stock-photo-texture-soccer-ball.html"
+
+Name: "Grass"
+Directory: "Resources/Images"
+Source: "https://opengameart.org/node/7787"
+
+Name: "White"
+Directory: "Resources/Images"
+Source: "http://www.photos-public-domain.com/2012/05/24/ivory-off-white-paper-texture/"
+
+Name: "Brick"
+Directory: "Resources/Images"
+Source: "https://www.textures.com/browse/brown/32111"
+
+Name: "NormalBrick", "NormalGrass"
+Directory: "Resources/Images"
+Source: "http://cpetry.github.io/NormalMap-Online/"
+Comment: Used this online tool to create the normal map for image "Brick" and "Grass"
+
+Name: "target"
+Directory: "Resources/Images"
+Source: "https://pixabay.com/en/photos/shooting/?image_type=vector"
+
+Name: "pitch"
+Directory: "Resources/Images"
+Source: "https://opengameart.org/content/football-pitch"
+
+Name: "earth"
+Directory: "Resources/Images"
+Source: "https://c1.staticflickr.com/3/2521/3884071286_edb50f8137_b.jpg"
+
+Name: "jupiter2"
+Directory: "Resources/Images"
+Source: "https://i.pinimg.com/originals/be/ba/b4/bebab4e9768b78a4f5dc8b7a2b24daaf.jpg"
+
+Name: "Space2"
+Directory: "Resources/Images"
+Source: "https://lyshastra.deviantart.com/art/Free-Space-Galaxy-Texture-435798702"
+
+Name: "space3"
+Directory: "Resources/Images"
+Source: "https://opengameart.org/sites/default/files/back_2.png"
+
+Name: "info2"
+Directory: "Resources/Images"
+Source: "https://cdn.pixabay.com/photo/2017/03/17/05/20/info-2150938_960_720.png"
+
+Name: "mars3"
+Directory: "Resources/Images"
+Source: "http://www.stickpng.com/assets/images/580b585b2edbce24c47b2708.png"
+
+Name: "earth2"
+Directory: "Resources/Images"
+Source: "https://upload.wikimedia.org/wikipedia/commons/2/22/Earth_Western_Hemisphere_transparent_background.png"
+
+Name: "jupiter3"
+Directory: "Resources/Images"
+Source: "https://upload.wikimedia.org/wikipedia/commons/e/e1/Jupiter_%28transparent%29.png"
+
+Name: "football2"
+Directory: "Resources/Images"
+Source: "https://lh3.googleusercontent.com/vOsWrPSq3EXzJ7NjwHQOak85LU8vhReYyRaf0vxxB5tIJDPP_daYf0IYQEoQ8iOFgn03hrs=s85"
+
+Name: "info2"
+Directory: "Resources/Images"
+Source: "https://cdn.pixabay.com/photo/2017/03/17/05/20/info-2150938_960_720.png"
+
+Name: "jupiter"
+Directory: "Resources/Images"
+Source: "https://image.freepik.com/free-photo/yellow-leather-macro-shot_1385-456.jpg"
+
+Name: "mars"
+Directory: "Resources/Images"
+Source: "https://3dexport.com/items/2015/02/20/385337/100200/mars_texture_3d_model_c4d_max_obj_fbx_ma_lwo_3ds_3dm_stl_1258981_o.png"
+
+Name: "Mars2"
+Directory: "Resources/Images"
+Source: "http://www.filterforge.com/filters/1103.jpg"
+
+
+Sounds taken from:
+
+Directory: "Resources/Sounds"
+All the sounds are taken from
+https://opengameart.org
+https://freesound.org
+
+Credits to Ryan Ackermann and raywenderlich.com for an idea of ball throwing mechanism in tutorial "How to make game like CanKnockDown".
