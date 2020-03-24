@@ -2,21 +2,35 @@
 import Foundation
 import SpriteKit
 import SceneKit
+/*
+* enum data container used
+* to define collision objects
+*/
 enum ColliderType: Int {
     case football = 0b0001
     case target = 0b0010
     case wall = 0b0100
     case goalPost = 0b1000
 }
+/*
+* This is the high-level class of the program where all
+* GUI elements are instantiated and gameplay is defined
+*/
 public class GameView: SCNView {
+    
+    //game elements (visible)
     var text: SCNText!
     var menuHighNode: SCNNode!
-    var moveTime: TimeInterval = 0
-    var animeTime: TimeInterval = 0
-
-    var gameData = Data()
     var footballNode: SCNNode?
     var targetNode: SCNNode?
+    var cameraNodePlanets: SCNNode!
+    var earthNode: SCNNode!
+    var jupiterNode: SCNNode!
+    var marsNode:SCNNode!
+    var goalPostNode: SCNNode!
+    var fenceNode: SCNNode!
+    var floorNode: SCNNode!
+    //Scene elements 
     let menuSCN = SCNScene(named: "Scene.scnassets/Menu.scn")!
     let gameSCN = SCNScene(named: "Scene.scnassets/Game.scn")!
     let marsSCN = SCNScene(named: "Scene.scnassets/Mars.scn")!
@@ -29,13 +43,10 @@ public class GameView: SCNView {
     let overlayInfo = InfoSKS(fileNamed: "SKScene/InfoOverlay.sks")!
     let infoScene = SCNScene(named: "Scene.scnassets/InfoScene.scn")!
     let overlayInst = SKScene(fileNamed: "SKScene/Instructions.sks")!
-    var cameraNodePlanets: SCNNode!
-    var earthNode: SCNNode!
-    var jupiterNode: SCNNode!
-    var marsNode:SCNNode!
-    var goalPostNode: SCNNode!
-    var fenceNode: SCNNode!
-    var floorNode: SCNNode!
+    //helper and property variables
+    var moveTime: TimeInterval = 0
+    var animeTime: TimeInterval = 0
+    var gameData = Data()
     var clickStartTime: TimeInterval!
     var clickEndTime: TimeInterval!
     let gestureRecognizer = NSGestureRecognizer()
@@ -50,6 +61,9 @@ public class GameView: SCNView {
         return node
     }()
     
+    /*
+    * Constructor
+    */
     public init(){
         super.init(frame: CGRect(x:0, y:0, width: 800, height: 600), options: nil)
         cameraNodePlanets = planetSCN.rootNode.childNode(withName: "camera", recursively: true)
@@ -62,6 +76,10 @@ public class GameView: SCNView {
         super.init(coder: aDecoder)
     }
     
+    /* 
+    * Defines events happening when right mouse is pressed
+    * A new ball is instantiated to replace the old one
+    */
     public override func rightMouseDown(with event: NSEvent?) {
         guard let balle = footballNode else {return}
         for ballNode in gameData.ballNodes{
@@ -69,10 +87,16 @@ public class GameView: SCNView {
         }
         balle.position = SCNVector3(x: 0, y: 0.35, z: 8.0)
     }
-
+    
+    /*
+    * Defines events happening when the left mouse is pressed
+    */
     public override func mouseDown(with event: NSEvent?) {
         let point = gestureRecognizer.location(in: self)
         let hitResults = self.hitTest(point, options: [:])
+        // Determine which object is clicked
+        // if a ball is clicked launching ball should start
+        // if buttons are clicked the transition to other scenes
         if hitResults.first?.node == footballNode {
             clickStartTime = Date().timeIntervalSince1970
             throwState = true
@@ -182,6 +206,9 @@ public class GameView: SCNView {
         }
     }
     
+    /*
+    * Helper methods to set graphical and audio elements
+    */
     func overlaysHud(){
         self.overlaySKScene = overlayHud
     }
@@ -207,7 +234,10 @@ public class GameView: SCNView {
         menuSCN.rootNode.addChildNode(menuHighNode)
         
     }
- 
+    
+    /*
+    * Helper methods used to graphically add elements and make transition from one scene to another
+    */
     func menuPath(){
         planet = 0
         overlayMenu.updateHighScore()
@@ -264,6 +294,9 @@ public class GameView: SCNView {
         settingTheBall(scene: marsSCN)
     }
    
+    /*
+    * This method instantiates a ball with certain properties
+    */
     func settingTheBall(scene: SCNScene){
         let footballScene = SCNScene(named: "Scene.scnassets/Football.scn")!
         let footballNodeTemp = footballScene.rootNode.childNode(withName: "sphere", recursively: true)!
@@ -280,7 +313,10 @@ public class GameView: SCNView {
         scene.rootNode.addChildNode(footballNodeTemp)
 
     }
- 
+    
+    /*
+    * Sets the target and its movement according to the level of the game
+    */
     func addTarget(sceneAT: SCNScene){
         let targetScene = SCNScene(named: "Scene.scnassets/Target.scn")!
         let targetNodeTemp = targetScene.rootNode.childNode(withName: "target", recursively: true)!
@@ -302,6 +338,13 @@ public class GameView: SCNView {
         gameData.targetCount += 1
     }
     
+    /*
+    * This controls the movement of the ball when it is launched
+    * The underlying algorithm is following: the time is calculated
+    * between mouse press and mouse release - it detemines the velocity,
+    * the path/angle/direction of the mouse movement during the press-release
+    * determines the direction of the ball.
+    */
     func throwBall(sceneTB: SCNScene, xS: CGFloat, yS: CGFloat, zS: CGFloat){
         guard let ballNode = footballNode else {return}
         let endingClick = gestureRecognizer
@@ -335,6 +378,9 @@ public class GameView: SCNView {
             sceneTB.rootNode.runAction(sequenceAction)
         }
     }
+    /*
+    * Sets restrictions on the target movement
+    */
     func targetXpos() -> CGFloat{
         guard let tempoTarget = targetNode else {return 0}
         let xCor = tempoTarget.position.x
@@ -345,12 +391,17 @@ public class GameView: SCNView {
             return -2.9
         }
     }
- 
+    /*
+    * Sets the infinite motion on the target
+    */
     func targetMove(timing: TimeInterval){
         guard let tempoTarget = targetNode else {return}
         let action = SCNAction.move(to: SCNVector3(x: targetXpos(), y: tempoTarget.position.y, z: tempoTarget.position.z), duration: timing)
         tempoTarget.runAction(action)
     }
+    /*
+    * Controls the gameover case
+    */
     func resetGame(){
         footballNode?.removeFromParentNode()
         for ballNode in gameData.ballNodes{
@@ -368,6 +419,10 @@ public class GameView: SCNView {
     }
 }
 
+/*
+* The scene renderer delegate called/initiated at the beginning of the each cycle
+* Which makes it a good avenue to control timings.
+*/
 extension GameView: SCNSceneRendererDelegate {
     public func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval){
         if planetSCN.isPaused == false {
@@ -391,6 +446,11 @@ extension GameView: SCNSceneRendererDelegate {
     }
 }
 
+/*
+* The contact delegate controls the collision between objects
+* In this case the collision control mainly consists of initiating sound
+* elements when a ball hits other objects as well as counting the score.
+*/
 extension GameView: SCNPhysicsContactDelegate {
     public func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var contactNode: SCNNode!
