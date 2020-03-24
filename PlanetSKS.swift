@@ -1,6 +1,10 @@
 import Foundation
 import SpriteKit
 import SceneKit
+/**
+* This class models the Planets scene. All the methods and
+* variable are aimed to add graphical components.
+*/
 public class PlanetSKS: SKScene {
     override public func sceneDidLoad(){
         super.sceneDidLoad()
