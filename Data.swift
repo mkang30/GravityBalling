@@ -1,6 +1,13 @@
 import Foundation
 import SpriteKit
 import SceneKit
+
+/**
+* This class models data object that contains
+* some data elements (sounds, counts, etc) and
+* helper methods needed to generate random 3D
+* coordinates.
+*/
 public class Data {
     
     //static so that the variables belong to the class rather than the object
