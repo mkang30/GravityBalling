@@ -1,6 +1,10 @@
 import Foundation
 import SpriteKit
 import SceneKit
+/**
+* This class models the Info scene. All the methods and
+* variable are aimed to add graphical components.
+*/
 public class InfoSKS: SKScene {
     var diameter: SKLabelNode!
     var density: SKLabelNode!
